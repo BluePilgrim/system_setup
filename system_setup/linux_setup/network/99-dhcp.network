@@ -1,0 +1,5 @@
+# DHCP enabling configuration
+# /etc/systemd/network/99-dhcp.network
+
+[Network]
+DHCP=v4

@@ -1,0 +1,3 @@
+# USE flags for docker
+
+app-emulation/docker -aufs btrfs -device-mapper -overlay
