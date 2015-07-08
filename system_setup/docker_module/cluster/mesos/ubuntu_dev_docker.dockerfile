@@ -9,5 +9,5 @@ MAINTAINER David Yang <david.yang@mentisware.com>
 USER root
 
 # build packages
-RUN apt-get update && apt-get install -y docker.io
-RUN ln -sf /usr/bin/docker.io /usr/local/bin/docker
+RUN apt-get update && apt-get install -y wget
+RUN wget -qO- https://get.docker.com/ | sh
