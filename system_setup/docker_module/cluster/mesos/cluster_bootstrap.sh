@@ -12,29 +12,30 @@
 echo Bootstrapping a cluster at ${PRIMARY_SERVER}
 
 # create the zookeeper
-docker run -d -p 2181:2181 -p 2888:2888 -p 3888:3888 --name=zookeeper -e SERVER_LIST=${PRIMARY_SERVER} -e ZK_ID=1 cluster/zookeeper
+docker run -d -p 2181:2181 -p 2888:2888 -p 3888:3888 --name=zookeeper -e SERVER_LIST=${PRIMARY_SERVER} -e ZK_ID=1 cluster/mesosphere /usr/local/bin/zookeeper_bootstrap.sh
 
 # wait for the zookeeper launch
-sleep 3
+sleep 1
 
 ZOOKEEPER=${PRIMARY_SERVER}:2181
 echo Launched ZooKeeper Service at ${ZOOKEEPER}
 
 # create one mesos slave first because the launch may stop mesos-master
-docker run -d -p 5051:5051 --name=mesos-slave --net=host --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /sys:/sys -v $(which docker):/usr/local/bin/docker -v /var/lib/docker:/var/lib/docker cluster/mesos mesos-slave --master=zk://${ZOOKEEPER}/mesos --containerizers=docker,mesos --executor_registration_timeout=5mins
+docker run -d -p 5051:5051 --name=mesos_slave1 --net=host --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /sys:/sys -e PUBLIC_IP=${PRIMARY_SERVER} -e ZOOKEEPER=${ZOOKEEPER} cluster/mesosphere /usr/local/bin/mesos-slave_bootstrap.sh
 echo "Created mesos slave..."
 
 # create three mesos masters
 QUORUM_VAL=2
-docker run -d -p 5050:5050 --name=mesos-master1 --net=host cluster/mesos mesos-master --work_dir=/var/lib/mesos --log_dir=/var/log/mesos --quorum=${QUORUM_VAL} --zk=zk://${ZOOKEEPER}/mesos --cluster="Cloud Arda" --hostname="Mesos Master 1" --port=5050 --registry_fetch_timeout=5mins --registry=in_memory
+#QUORUM_VAL=1
+docker run -d -p 5050:5050 --name=mesos_master1 --net=host -e PUBLIC_IP=${PRIMARY_SERVER} -e ZOOKEEPER=${ZOOKEEPER} -e QUORUM_VAL=${QUORUM_VAL} -e NAME="Mesos Master 1" -e PORT=5050 cluster/mesosphere /usr/local/bin/mesos-master_bootstrap.sh
 echo "Created mesos master 1..."
 
-docker run -d -p 15050:5050 --name=mesos-master2 --net=host cluster/mesos mesos-master --work_dir=/var/lib/mesos --log_dir=/var/log/mesos --quorum=${QUORUM_VAL} --zk=zk://${ZOOKEEPER}/mesos --cluster="Cloud Arda" --hostname="Mesos Master 2" --port=15050 --registry_fetch_timeout=5mins --registry=in_memory
-echo "Created mesos master 2..."
+docker run -d -p 15050:5050 --name=mesos_master2 --net=host -e PUBLIC_IP=${PRIMARY_SERVER} -e ZOOKEEPER=${ZOOKEEPER} -e QUORUM_VAL=${QUORUM_VAL} -e NAME="Mesos Master 2" -e PORT=15050 cluster/mesosphere /usr/local/bin/mesos-master_bootstrap.sh
+#echo "Created mesos master 2..."
 
-docker run -d -p 25050:5050 --name=mesos-master3 --net=host cluster/mesos mesos-master --work_dir=/var/lib/mesos --log_dir=/var/log/mesos --quorum=${QUORUM_VAL} --zk=zk://${ZOOKEEPER}/mesos --cluster="Cloud Arda" --hostname="Mesos Master 3" --port=25050 --registry_fetch_timeout=5mins --registry=in_memory
-echo "Created mesos master 3..."
+docker run -d -p 25050:5050 --name=mesos_master3 --net=host -e PUBLIC_IP=${PRIMARY_SERVER} -e ZOOKEEPER=${ZOOKEEPER} -e QUORUM_VAL=${QUORUM_VAL} -e NAME="Mesos Master 3" -e PORT=25050 cluster/mesosphere /usr/local/bin/mesos-master_bootstrap.sh
+#echo "Created mesos master 3..."
 
 # create one marathon
-docker run -d -p 9090:9090 --name=marathon --net=host -e MARATHON_ZK=zk://${ZOOKEEPER}/marathon -e MESOS_MASTER=zk://${ZOOKEEPER}/mesos cluster/marathon
+docker run -d -p 9090:9090 --name=marathon --net=host -e ZOOKEEPER=${ZOOKEEPER} cluster/mesosphere /usr/local/bin/marathon_bootstrap.sh
 echo "Created Marathon..."
