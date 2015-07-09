@@ -31,10 +31,10 @@ docker run -d -p 5050:5050 --name=mesos_master1 --net=host -e PUBLIC_IP=${PRIMAR
 echo "Created mesos master 1..."
 
 docker run -d -p 15050:5050 --name=mesos_master2 --net=host -e PUBLIC_IP=${PRIMARY_SERVER} -e ZOOKEEPER=${ZOOKEEPER} -e QUORUM_VAL=${QUORUM_VAL} -e NAME="Mesos Master 2" -e PORT=15050 cluster/mesosphere /usr/local/bin/mesos-master_bootstrap.sh
-#echo "Created mesos master 2..."
+echo "Created mesos master 2..."
 
 docker run -d -p 25050:5050 --name=mesos_master3 --net=host -e PUBLIC_IP=${PRIMARY_SERVER} -e ZOOKEEPER=${ZOOKEEPER} -e QUORUM_VAL=${QUORUM_VAL} -e NAME="Mesos Master 3" -e PORT=25050 cluster/mesosphere /usr/local/bin/mesos-master_bootstrap.sh
-#echo "Created mesos master 3..."
+echo "Created mesos master 3..."
 
 # create one marathon
 docker run -d -p 9090:9090 --name=marathon --net=host -e ZOOKEEPER=${ZOOKEEPER} cluster/mesosphere /usr/local/bin/marathon_bootstrap.sh
