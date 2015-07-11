@@ -2,7 +2,7 @@
 
 : ${HADOOP_PREFIX:=/usr/local/hadoop}
 : ${JAVA_HOME:=/usr/share/jvm/default-java}
-: ${HOST_IP:=`hostname -i`}
+: ${HOST_IP:=`hostname -i | sed -e 's/ $//'`}
 $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 
 rm /tmp/*.pid
