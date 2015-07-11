@@ -16,7 +16,7 @@ ZOOKEEPER=${PRIMARY_SERVER}:2181
 QUORUM_VAL=2
 
 MESOS_SLAVE_OPTS="--ip=${PRIMARY_SERVER} --master=zk://${ZOOKEEPER}/mesos --containerizers=docker,mesos --executor_registration_timeout=5mins"
-MESOS_MASTER_OPTS="--ip=${PRIMARY_SERVER} --work_dir=/var/lib/mesos --log_dir=/var/log/mesos --quorum=${QUORUM_VAL} --zk=zk://${ZOOKEEPER}/mesos --cluster=\"Cloud Arda\" --registry_fetch_timeout=5mins --registry=in_memory"
+MESOS_MASTER_OPTS="--ip=${PRIMARY_SERVER} --work_dir=/var/lib/mesos --log_dir=/var/log/mesos --quorum=${QUORUM_VAL} --zk=zk://${ZOOKEEPER}/mesos --cluster=Arda --registry_fetch_timeout=5mins --registry=in_memory"
 MARATHON_OPTS="--http_port 9090 --zk zk://$ZOOKEEPER/marathon --master zk://$ZOOKEEPER/mesos --webui_url http://${PRIMARY_SERVER}:9090"
 echo Bootstrapping a cluster at ${PRIMARY_SERVER}
 echo MESOS_SLAVE_OPTS=${MESOS_SLAVE_OPTS}
