@@ -8,7 +8,8 @@ MAINTAINER David Yang <david.yang@mentisware.com>
 USER root
 
 # build packages
-RUN apt-get update && apt-get install -y \
+RUN \
+  apt-get update && apt-get install -y \
 	build-essential autoconf libtool zlib1g-dev \
 	git libcurl4-nss-dev libsasl2-dev \
 	maven \
@@ -16,5 +17,6 @@ RUN apt-get update && apt-get install -y \
 	libsvn-dev libapr1-dev
 
 # export environment
-ENV CFLAGS '-O2'
-ENV CXXFLAGS '-O2'
+ENV CFLAGS='-O2' CXXFLAGS='-O2'
+
+CMD ["bash"]
