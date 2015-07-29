@@ -19,7 +19,7 @@ RUN \
                   openjdk-7-jdk \
                   zip wget libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev \
                   libcups2-dev libfreetype6-dev libasound2-dev \
-                  mercurial && \
+                  gdb mercurial && \
   wget -qO- https://adopt-openjdk.ci.cloudbees.com/view/OpenJDK/job/jtreg/lastSuccessfulBuild/artifact/jtreg-4.1-b12.tar.gz | tar -xz -C /usr/local && \
   mkdir -p /usr/local/jtreg/linux && ln -s /usr/local/jtreg/bin /usr/local/jtreg/linux/bin && \
   mkdir -p /usr/local/jtreg/win32 && ln -s /usr/local/jtreg/bin /usr/local/jtreg/win32/bin && \
@@ -27,6 +27,11 @@ RUN \
   echo "[ui]" > /root/.hgrc && echo "username=davidyang" >> /root/.hgrc
 
 # ENV JAVA_HOME /usr/lib/jvm/default-java
+
+# install Eclipse CDT Environment
+RUN \
+  wget -qO- http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/mars/R/eclipse-cpp-mars-R-linux-gtk-x86_64.tar.gz | tar -xz -C /usr/local && \
+  ln -s /usr/local/eclipse/eclipse /usr/local/bin/eclipse
 
 # check out open jdk 8u40
 RUN \
