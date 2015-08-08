@@ -17,8 +17,9 @@ sed -r -i -e s/localhost/$HOST_IP/ -e 's/[[:alnum:]]{1,3}\.[[:alnum:]]{1,3}\.[[:
 service ssh start
 
 # register slaves (slave ip addresses are given by comma separated list in SLAVES)
-echo default_hadoop_slave >> $HADOOP_CONF_DIR/slaves
-scp $HADOOP_PREFIX/etc/hadoop/core-site.xml default_hadoop_slave:$HADOOP_PREFIX/etc/hadoop/core-site.xml
+# echo default_hadoop_slave >> $HADOOP_CONF_DIR/slaves
+# scp $HADOOP_PREFIX/etc/hadoop/core-site.xml default_hadoop_slave:$HADOOP_PREFIX/etc/hadoop/core-site.xml
+rm -f $HADOOP_CONF_DIR/slaves
 for s in ${SLAVES//,/ }; do
   echo "new slave $s is added."
   echo $s >> $HADOOP_CONF_DIR/slaves
