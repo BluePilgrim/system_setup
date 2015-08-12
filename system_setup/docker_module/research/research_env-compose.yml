@@ -12,11 +12,10 @@
 devel:
 #  build: .
 #  dockerfile: openjdk.dockerfile
-  image: research/openjdk:2.0
+  image: research/openjdk
   ports:
     - "9900:22"
   volumes:
     - $HOME/research:/root/research
   hostname: devel
   working_dir: /root
-
