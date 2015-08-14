@@ -1,0 +1,21 @@
+#test:
+#  build: .
+#  dockerfile: openjdk_build.dockerfile
+#  image: research/openjdk_build
+#  ports:
+#    - "9901:22"
+#  volumes:
+#    - $HOME/research:/root/research
+#  hostname: jdk8u40
+#  working_dir: /root
+
+devel:
+#  build: .
+#  dockerfile: openjdk.dockerfile
+  image: research/openjdk
+  ports:
+    - "9900:22"
+  volumes:
+    - $HOME/research:/root/research
+  hostname: devel
+  working_dir: /root

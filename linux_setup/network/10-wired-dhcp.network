@@ -1,0 +1,7 @@
+# DHCP enabling configuration
+# /etc/systemd/network/10-wired-dhcp.network
+[Match]
+Name=wired*
+
+[Network]
+DHCP=yes

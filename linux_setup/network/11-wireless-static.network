@@ -1,0 +1,9 @@
+# DHCP enabling configuration
+# /etc/systemd/network/11-wireless-static.network
+[Match]
+Name=wireless*
+
+[Network]
+Address=10.0.1.131/24
+Gateway=10.0.1.1
+DNS=10.0.1.1

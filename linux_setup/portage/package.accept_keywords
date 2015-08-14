@@ -1,0 +1,9 @@
+# In order to install several newest (testing) versions.
+sys-devel/gcc ~amd64
+sys-kernel/gentoo-sources ~amd64
+
+# required by app-emulation/docker-1.5.0[btrfs]
+# required by app-emulation/docker (argument)
+=sys-fs/btrfs-progs-3.18.2 ~amd64
+# required by app-emulation/docker (argument)
+=app-emulation/docker-1.5.0 ~amd64

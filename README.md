@@ -10,3 +10,7 @@ Linux setup information(specially for Gentoo Distro) has been added to the repos
 
 # @ July 6, 2015
 Mesos-based cloud environment setup will be added.
+
+# @ August 13, 2015
+The repository structures and contents has been revamped.
+
