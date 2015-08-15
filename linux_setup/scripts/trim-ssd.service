@@ -1,0 +1,13 @@
+# /etc/systemd/system/trim-ssd.service
+
+[Unit]
+Description=TRIM SSD instead of mount -o discard
+DefaultDependencies=no
+Conflicts=shutdown.target
+After=local-fs.target time-sync.target
+Before=shutdown.target
+
+[Service]
+#Type=oneshot
+ExecStart=/sbin/fstrim -a
+IOSchedulingClass=idle

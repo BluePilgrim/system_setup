@@ -17,12 +17,12 @@
 /dev/sda1		/boot		fat32		noauto,noatime	0 2
 /dev/sda2		/		btrfs		subvol=root,ssd,noatime,compress=lzo,autodefrag,space_cache	0 0
 /dev/sda2		/home		btrfs		subvol=home,ssd,noatime,compress=lzo,autodefrag,space_cache	0 0
-/dev/sda2		/usr/portage	btrfs		subvol=portage,ssd,noatime,autodefrag		0 0
-/dev/sdb1		/var		btrfs		subvol=var,noatime,compress=lzo,autodefrag	0 0
-/dev/sda2		/var/lib	btrfs		subvol=varlib,ssd,noatime,space_cache		0 0
+/dev/sda2		/usr/portage	btrfs		subvol=portage,ssd,noatime,autodefrag,space_cache		0 0
+/dev/sdb1		/var		btrfs		subvol=var,noatime,compress=lzo,autodefrag,space_cache		0 0
+/dev/sda2		/var/lib	btrfs		subvol=varlib,ssd,noatime,nodatacow,space_cache		0 0
 /dev/sdb1		/opt		btrfs		subvol=opt,noatime,compress=lzo,autodefrag	0 0
 /dev/sdb2		none		swap		sw	0 0
-tmpfs			/tmp		tmpfs		size=2G,nodev,nosuid		0 0
+tmpfs			/tmp		tmpfs		size=1G,nodev,nosuid		0 0
 tmpfs			/var/spool	tmpfs		size=1G,nodev,nosuid		0 0
 tmpfs			/var/tmp	tmpfs		size=1G,nodev,nosuid		0 0
 tmpfs			/var/cache	tmpfs		size=1G,nodev,nosuid		0 0

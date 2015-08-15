@@ -1,0 +1,13 @@
+# /etc/systemd/system/sync-portage.service
+
+[Unit]
+Description=Synchronize Portage
+DefaultDependencies=no
+Conflicts=shutdown.target
+After=local-fs.target time-sync.target
+Before=shutdown.target
+
+[Service]
+# Type=oneshot
+ExecStart=/usr/bin/emerge --ask n --sync
+IOSchedulingClass=idle
