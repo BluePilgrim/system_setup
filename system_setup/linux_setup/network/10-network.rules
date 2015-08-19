@@ -1,8 +1,0 @@
-# network set up by david
-# /etc/udev/rules.d/10-network.rules
-
-# define manual device names
-# for wired ethernet
-SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="c8:bc:c8:9b:db:66", NAME="wired0"
-# for wireless lan 
-SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="c8:bc:c8:df:13:f3", NAME="wireless0"

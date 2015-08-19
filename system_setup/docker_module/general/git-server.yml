@@ -1,9 +1,0 @@
-git:
-  restart: always
-  image: research/base
-  ports:
-    - "9998:22"
-  volumes:
-    - $HOME/git:/git
-  hostname: git
-  working_dir: /root

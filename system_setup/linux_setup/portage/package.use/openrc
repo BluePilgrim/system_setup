@@ -1,7 +1,0 @@
-# openrc package use
-# /etc/portage/package.use/openrc
-# Since openrc is in @system, it is impossible to remove.
-# Instead, all dependent modules are removed from the dependency.
-
-sys-apps/openrc -*
-

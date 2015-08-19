@@ -1,6 +1,0 @@
-# xorg-server package use
-# /etc/portage/package.use/xorg-server
-
-x11-base/xorg-server udev
-# x11-apps/xinit minimal
-
