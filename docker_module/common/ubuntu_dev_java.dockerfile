@@ -5,7 +5,7 @@
 # this dockerfile doest not work acutally, because the install scripts requires some interaction.
 #
 
-FROM ubuntu_dev/base:1.0
+FROM ubuntu_dev/base
 MAINTAINER David Yang <david.yang@mentisware.com>
 
 USER root

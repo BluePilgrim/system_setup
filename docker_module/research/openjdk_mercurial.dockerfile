@@ -25,9 +25,9 @@ RUN \
 # ENV JAVA_HOME /usr/lib/jvm/default-java
 
 # install Eclipse CDT Environment
-RUN \
-  wget -qO- http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/mars/R/eclipse-cpp-mars-R-linux-gtk-x86_64.tar.gz | tar -xz -C /usr/local && \
-  ln -s /usr/local/eclipse/eclipse /usr/local/bin/eclipse
+#RUN \
+#  wget -qO- http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/mars/R/eclipse-cpp-mars-R-linux-gtk-x86_64.tar.gz | tar -xz -C /usr/local && \
+#  ln -s /usr/local/eclipse/eclipse /usr/local/bin/eclipse
 
 # check out open jdk 8u60
 RUN \
@@ -35,11 +35,11 @@ RUN \
   ln -s /root/jdk8u60 /root/jdk8
 
 # build the open jdk system as a base
-RUN \
-  cd /root/jdk8 && \
-  bash ./configure && \
-  sed -i '/^SUPPORTED_OS_VERSION/ s:.*:\#&\nDISABLE_HOTSPOT_OS_VERSION_CHECK=ok:' hotspot/make/linux/Makefile && \
-  make all
+#RUN \
+#  cd /root/jdk8 && \
+#  bash ./configure && \
+#  sed -i '/^SUPPORTED_OS_VERSION/ s:.*:\#&\nDISABLE_HOTSPOT_OS_VERSION_CHECK=ok:' hotspot/make/linux/Makefile && \
+#  make all
 
 # install OpenFX system
 #RUN \
@@ -55,18 +55,18 @@ RUN \
 #    cd /root/rt && sed -i '/compileJava.dependsOn/s:verifyJava:\ :' build.gradle && gradle
 
 # enable the support for JITWatch
-RUN \
-  cd /root/jdk8/hotspot/src/share/tools/hsdis && \
-  wget -qO- http://ftp.heanet.ie/mirrors/gnu/binutils/binutils-2.23.2.tar.gz | tar -xz && \
-  apt-get install -y libgmp-dev libmpfr-dev libmpc-dev g++-multilib && \
-  sed -i -e 's/@colophon/@@colophon/' -e 's/doc@cygnus.com/doc@@cygnus.com/' binutils-2.23.2/bfd/doc/bfd.texinfo && \
-  make BINUTILS=binutils-2.23.2 ARCH=amd64 && \
-  cp build/linux-amd64/hsdis-amd64.so /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/
+#RUN \
+#  cd /root/jdk8/hotspot/src/share/tools/hsdis && \
+#  wget -qO- http://ftp.heanet.ie/mirrors/gnu/binutils/binutils-2.23.2.tar.gz | tar -xz && \
+#  apt-get install -y libgmp-dev libmpfr-dev libmpc-dev g++-multilib && \
+#  sed -i -e 's/@colophon/@@colophon/' -e 's/doc@cygnus.com/doc@@cygnus.com/' binutils-2.23.2/bfd/doc/bfd.texinfo && \
+#  make BINUTILS=binutils-2.23.2 ARCH=amd64 && \
+#  cp build/linux-amd64/hsdis-amd64.so /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/
 
 # install JITWatch
-RUN \
-  cd /root && git clone https://github.com/AdoptOpenJDK/jitwatch.git && \
-  cd /root/jitwatch && mvn clean compile test
+#RUN \
+#  cd /root && git clone https://github.com/AdoptOpenJDK/jitwatch.git && \
+#  cd /root/jitwatch && mvn clean compile test
 
 # WORKDIR /root
 # CMD ["/bin/bash"]

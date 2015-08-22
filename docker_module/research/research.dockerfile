@@ -4,7 +4,7 @@
 #     name : research/base
 
 # FROM ubuntu_dev/base:1.0
-FROM ubuntu_dev/java:1.0
+FROM ubuntu_dev/java
 MAINTAINER David Yang <david.yang@mentisware.com>
 
 USER root
