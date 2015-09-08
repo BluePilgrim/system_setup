@@ -31,9 +31,9 @@ RUN \
 # build the open jdk system as a base
 RUN \
   cd /root/jdk8 && \
-  bash ./configure --enable-debug && \
+  bash ./configure --enable-debug
 #  sed -i '/^SUPPORTED_OS_VERSION/ s:.*:\#&\nDISABLE_HOTSPOT_OS_VERSION_CHECK=ok:' hotspot/make/linux/Makefile && \
-  make all
+#  make all
 
 # enable the support for JITWatch
 #RUN \

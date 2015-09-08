@@ -12,7 +12,7 @@ USER root
 RUN \
   apt-get update && \
   apt-get install -y \
-                  gdb emacs hunspell git\
+                  gdb emacs hunspell \
                   zip wget libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev \
                   libcups2-dev libfreetype6-dev libasound2-dev \
                   openssh-server texlive-full

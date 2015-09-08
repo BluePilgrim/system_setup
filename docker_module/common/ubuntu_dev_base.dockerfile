@@ -12,7 +12,7 @@ RUN \
   apt-get update && apt-get install -y \
 	build-essential autoconf libtool zlib1g-dev \
 	git libcurl4-nss-dev libsasl2-dev \
-	maven \
+	maven ccache \
 	python-dev python-boto \
 	libsvn-dev libapr1-dev
 
